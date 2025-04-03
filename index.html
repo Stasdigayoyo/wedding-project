@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Wedding day</title>
+  </head>
+  <body>
+    <section class="sectionPreviow ">
+      <div class="container ">
+        <div class="img__fon"></div>
+        <div class="names">
+          <div class="names__name names__title top-title">Станислав</div>
+          <div class="names__and hidden">&</div>
+          <div class="names__name names__title bottom-title">Анжелика</div>
+        </div>
+        <div class="date hide">
+          <div class="subtitle">Дата</div>
+          <div class="date__divider"></div>
+          <div class="subtitle">13.09.2025</div>
+        </div>
+        <div class="guest hide">
+          <div class="title">Дорогие гости!</div>
+          <div class="descr">
+            С большой радостью приглашаем вас разделить с нами особенный день –
+          </div>
+          <div class="title guest__title">ДЕНЬ НАШЕЙ СВАДЬБЫ!</div>
+        </div>
+        <div class="end__timer hide">
+          <div class="subtitle">До торжества осталось:</div>
+          <div class="timer">
+            <div class="timer__block">
+              <span id="days">12</span>
+              дней
+            </div>
+            <div class="timer__block">
+              <span id="hours">20</span>
+              часов
+            </div>
+            <div class="timer__block">
+              <span id="minutes">56</span>
+              минут
+            </div>
+            <div class="timer__block">
+              <span id="seconds">20</span>
+              секунд
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sectionDay">
+      <div class="container">
+        <div class="calendar hide">
+          <div class="subtitle september">Сентябрь</div>
+          <div class="grid">
+            <div class="header">Пн</div>
+            <div class="header">Вт</div>
+            <div class="header">Ср</div>
+            <div class="header">Чт</div>
+            <div class="header">Пт</div>
+            <div class="header weekend">Сб</div>
+            <div class="header weekend">Вс</div>
+
+            <div class="day">1</div>
+            <div class="day">2</div>
+            <div class="day">3</div>
+            <div class="day">4</div>
+            <div class="day">5</div>
+            <div class="day weekend">6</div>
+            <div class="day weekend">7</div>
+            <div class="day">8</div>
+            <div class="day">9</div>
+            <div class="day">10</div>
+            <div class="day">11</div>
+            <div class="day">12</div>
+            <div class="day weekend highlight">
+              13
+              <svg
+                class="heart"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                enable-background="new 0 0 512 512"
+              >
+                <g>
+                  <path
+                    d="m144.2,121.8c-2,1.7-40.3,36.3-9.6,104.3 4.6,10.3 0.1,22.3-10.2,27-7.9,3.6-21.1,2.9-27-10.2-43.7-97.8 18-150.3 20.7-152.5 8.7-7.2 21.5-5.9 28.7,2.8 7.2,8.7 6,21.5-2.6,28.6zm314-85.8c-50.9-42.9-132.1-29-202.2,33.1-70.1-62.1-151.3-76-202.2-33.1-63.6,53.7-55.4,174.8 18.7,275.8 49.1,66.9 164.1,178.9 169.3,183.3 12.8,10.7 24.4,3.8 28.3,0 4.9-4.7 120.2-116.4 169.3-183.3 74.2-101 82.4-222.1 18.8-275.8z"
+                    fill="#000000"
+                    style="fill: rgb(128, 138, 109)"
+                  ></path>
+                </g>
+              </svg>
+            </div>
+            <div class="day weekend">14</div>
+            <div class="day">15</div>
+            <div class="day">16</div>
+            <div class="day">17</div>
+            <div class="day">18</div>
+            <div class="day">19</div>
+            <div class="day weekend">20</div>
+            <div class="day weekend">21</div>
+            <div class="day">22</div>
+            <div class="day">23</div>
+            <div class="day">24</div>
+            <div class="day">25</div>
+            <div class="day">26</div>
+            <div class="day weekend">27</div>
+            <div class="day weekend">28</div>
+            <div class="day">29</div>
+            <div class="day">30</div>
+          </div>
+        </div>
+
+        <div class="location hide">
+          <div class="subtitle">Место проведения церемонии</div>
+          <div class="location__descr">
+            Дворец бракосочетания Екатерининский Зал улица Офицерская 47
+          </div>
+          <div class="location__map">
+            <iframe
+              class="location__map"
+              src="https://yandex.ru/map-widget/v1/?um=constructor%3A87032e07d5a7e4599b97ea96dee38b8db2bf956500a7f86c1fdd4fe01edff1fb&amp;source=constructor"
+              width="320"
+              height="240"
+              frameborder="0"
+            ></iframe>
+          </div>
+          <div class="wrapbutt">
+            <button class="buttonMap">Посмотреть на карте</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sectionTime">
+      <div class="container">
+        <div class="title__wrapper hide">
+          <img class="title__img" src="img/elements/vetka.png" alt="flowers" style="transform: scaleX(-1) rotate(55deg);">
+          <div class="title timing__title">Тайминг дня</div>
+          <img class="title__img" src="img/elements/vetka.png" alt="flowers">
+        </div>
+        <div class="timing">
+          <div class="timing__wrapper hide">
+            <div class="time">14:00</div>
+            <div><img src="icons/location.png" alt="Сбор гостей" /></div>
+            <div class="descr">Сбор гостей</div>
+          </div>
+            
+          <div class="timing__wrapper hide">
+            <div class="time">14:30</div>
+            <div><img src="icons/couple.png" alt="Церемония" /></div>
+            <div class="descr">Церемония бракосочетания</div>
+          </div>
+
+          <div class="timing__wrapper hide">
+            <div class="time">15:00-15:30</div>
+            <div><img src="icons/bus.png" alt="Транспорт" /></div>
+            <div class="descr">Выезд в парк Галицкого</div>
+          </div>
+
+          <div class="timing__wrapper hide">
+            <div class="time">15:30-17:30</div>
+            <div><img src="icons/lomography.png" alt="Фотосессия" /></div>
+            <div class="descr">Фотосессия в парке</div>
+          </div>
+
+          <div class="timing__wrapper hide">
+            <div class="time">17:30</div>
+            <div><img src="icons/bus1.png" alt="Ресторан" /></div>
+            <div class="descr">Отправление в ресторан "Маск"</div>
+          </div>
+          <div class="timing__wrapper hide">
+            <div class="time">18:00</div>
+            <div><img src="icons/toast.png" alt="Банкет" /></div>
+            
+            <div class="descr">Начало банкета</div>
+          </div>
+          <div class="timing__wrapper hide">
+            <div class="time">23:00</div>
+            <div> <img src="icons/wedding-cake.png" alt="Банкет" /></div>
+            <div class="descr">Свадебный торт</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="form">
+      <div class="container">
+        <div class="form-container">
+          <div class="subtitle form__subtitle hide">Анкета гостя</div>
+          <p class="hide">
+            Пожалуйста, чтобы все прошло идеально, ответьте на несколько
+            вопросов в анкете
+          </p>
+
+          <form >
+            <label for="surname">Фамилия</label>
+            <input
+              class="input"
+              type="text"
+              id="surname"
+              name="surname"
+              required
+            />
+
+            <label for="name">Имя</label>
+            <input class="input" type="text" id="name" name="name" required />
+
+            <label>Планируете ли вы присутствовать на свадьбе?</label>
+            <div class="radio-group">
+              <label class="custom-radio"
+                ><input
+                  type="radio"
+                  name="attendance"
+                  value="yes"
+                  required
+                /><span></span> Обязательно да</label
+              >
+              <label class="custom-radio custom-radio__no"
+                ><input
+                  type="radio"
+                  name="attendance"
+                  value="no"
+                /><span></span> К сожалению, не получится</label
+              >
+            </div>
+
+            <label for="guest">С кем придёте на праздник?</label>
+            <input
+              class="input"
+              type="text"
+              id="guest"
+              name="guest"
+              placeholder="Имя Фамилия"
+            />
+
+            <label>Уточните ваши предпочтения в алкоголе</label>
+            <div class="checkbox-group">
+              <label class="custom-checkbox"
+                ><input
+                  type="checkbox"
+                  name="drink"
+                  value="red_wine"
+                /><span></span> Вино красное</label
+              >
+              <label class="custom-checkbox"
+                ><input
+                  type="checkbox"
+                  name="drink"
+                  value="white_wine"
+                /><span></span> Вино белое</label
+              >
+              <label class="custom-checkbox"
+                ><input
+                  type="checkbox"
+                  name="drink"
+                  value="vodka"
+                /><span></span> Водка</label
+              >
+              <label class="custom-checkbox"
+                ><input
+                  type="checkbox"
+                  name="drink"
+                  value="whiskey"
+                /><span></span> Виски</label
+              >
+              <label class="custom-checkbox"
+                ><input
+                  type="checkbox"
+                  name="drink"
+                  value="cognac"
+                /><span></span> Коньяк</label
+              >
+            </div>
+
+            <label for="song"
+              >Какой трек вы бы хотели услышать на нашей свадьбе?</label
+            >
+            <textarea
+              class="input"
+              id="song"
+              name="song"
+              placeholder="Elvis Presley – Can't Help Falling in Love 💕"
+              rows="1"
+            ></textarea>
+
+            <button type="submit" class="buttonSubmit">Отправить</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <script src="bundle.js"></script>
+  </body>
+</html>
