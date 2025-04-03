@@ -1,350 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./js/modules/checkWordsInputs.js":
-/*!****************************************!*\
-  !*** ./js/modules/checkWordsInputs.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-const checkWordsInputs = selector => {
-  const inputs = document.querySelectorAll(selector);
-  inputs.forEach(input => {
-    input.addEventListener('input', () => {
-      input.value = input.value.replace(/[^а-яё\s]/gi, '');
-    });
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (checkWordsInputs);
-
-/***/ }),
-
-/***/ "./js/modules/form.js":
-/*!****************************!*\
-  !*** ./js/modules/form.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _services_services__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/services */ "./js/services/services.js");
-/* harmony import */ var _checkWordsInputs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./checkWordsInputs */ "./js/modules/checkWordsInputs.js");
-
-
-const forms = formSelector => {
-  const form = document.querySelector(formSelector);
-  (0,_checkWordsInputs__WEBPACK_IMPORTED_MODULE_1__["default"])("input[name='surname']");
-  (0,_checkWordsInputs__WEBPACK_IMPORTED_MODULE_1__["default"])("input[name='name']");
-  (0,_checkWordsInputs__WEBPACK_IMPORTED_MODULE_1__["default"])("input[name='guest']");
-  const message = {
-    loading: "icons/spinner.svg",
-    success: "Анкета успешно отправлена",
-    failure: "Что-то пошло не так...Попробуйте перезагрузить страницу"
-  };
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    const attendance = form.querySelector("input[name='attendance']:checked");
-    if (!attendance) {
-      alert("Выберите присутствие (Да или Нет)");
-      return;
-    }
-    const statusMessage = document.createElement("img");
-    statusMessage.src = message.loading;
-    statusMessage.style.cssText = `
-        display: block;
-        margin: 0 auto;
-        `;
-    form.insertAdjacentElement("afterend", statusMessage);
-    const formData = new FormData(form);
-    const formObject = Object.fromEntries(formData.entries());
-
-    // Проверяем, есть ли поле "drink" (если чекбоксы выбраны)
-    if (formData.has("drink")) {
-      formObject.drink = formData.getAll("drink"); // Записываем массив всех выбранных значений
-    }
-    const json = JSON.stringify(formObject);
-
-    // Здесь будет URL вашего API после деплоя
-    (0,_services_services__WEBPACK_IMPORTED_MODULE_0__.postData)("https://wedding-backend.vercel.app/api/send", json).then(data => {
-      console.log(data);
-      showModal(message.success);
-      statusMessage.remove();
-    }).catch(e => {
-      console.log(e.message);
-      showModal(message.failure);
-    }).finally(() => {
-      form.reset();
-    });
-  });
-  function showModal(message) {
-    const modal = document.createElement("div");
-    modal.classList.add("modal");
-    modal.innerHTML = `
-            <div class="modal__content">
-                <div><img class="dex" src="img/Dex.png" alt="Dex" /></div>
-                <div class="modal__title">${message}</div>
-            </div>`;
-    document.body.append(modal);
-    setTimeout(() => {
-      modal.remove();
-    }, 4000);
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (forms);
-
-/***/ }),
-
-/***/ "./js/modules/observer.js":
-/*!********************************!*\
-  !*** ./js/modules/observer.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-const observe = selector => {
-  const elements = document.querySelectorAll(selector);
-  if (!elements) return;
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-        entry.target.classList.remove('hide');
-      }
-    });
-  }, {
-    threshold: 1
-  });
-  if (elements.length === 1) {
-    observer.observe(elements[0]);
-  } else {
-    elements.forEach(el => observer.observe(el));
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (observe);
-
-/***/ }),
-
-/***/ "./js/modules/routeMap.js":
-/*!********************************!*\
-  !*** ./js/modules/routeMap.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-const routeMap = selector => {
-  const button = document.querySelector(selector);
-  button.addEventListener("click", e => {
-    const destination = "45.059945, 38.987466"; // Координаты Офицерская 47, Краснодар
-    console.log(e.target);
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const userLat = position.coords.latitude;
-        const userLon = position.coords.longitude;
-        const url = `https://yandex.ru/maps/?rtext=${userLat},${userLon}~${destination}&rtt=auto`;
-        window.open(url, "_blank");
-      }, () => {
-        alert("Не удалось определить местоположение. Разрешите доступ к геолокации!");
-      });
-    } else {
-      alert("Ваш браузер не поддерживает геолокацию.");
-    }
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (routeMap);
-
-/***/ }),
-
-/***/ "./js/modules/showContentTimeout.js":
-/*!******************************************!*\
-  !*** ./js/modules/showContentTimeout.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-const showContentTimeout = selector => {
-  const content = document.querySelector(selector);
-  setTimeout(() => {
-    content.classList.remove("hide");
-    content.classList.add("show");
-  }, 1700);
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (showContentTimeout);
-
-/***/ }),
-
-/***/ "./js/modules/timer.js":
-/*!*****************************!*\
-  !*** ./js/modules/timer.js ***!
-  \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-const timer = (id, deadline) => {
-  function getTimeRemaining(endtime) {
-    let days, hours, minutes, seconds;
-    const t = Date.parse(endtime) - Date.parse(new Date());
-    days = Math.floor(t / (1000 * 60 * 60 * 24));
-    hours = Math.floor(t / (1000 * 60 * 60) % 24);
-    minutes = Math.floor(t / 1000 / 60 % 24);
-    seconds = Math.floor(t / 1000 % 24);
-    return {
-      total: t,
-      days,
-      hours,
-      minutes,
-      seconds
-    };
-  }
-  function zeroNum(num) {
-    if (num >= 0 && num < 10) {
-      return `0${num}`;
-    } else {
-      return num;
-    }
-  }
-  function getClock(selector, endtime) {
-    const timer = document.querySelector(selector),
-      days = timer.querySelector("#days"),
-      hours = timer.querySelector("#hours"),
-      minutes = timer.querySelector("#minutes"),
-      seconds = timer.querySelector("#seconds"),
-      timeInterval = setInterval(updateClock, 1000);
-    updateClock();
-    function updateClock() {
-      const t = getTimeRemaining(endtime);
-      days.innerHTML = zeroNum(t.days);
-      hours.innerHTML = zeroNum(t.hours);
-      minutes.innerHTML = zeroNum(t.minutes);
-      seconds.innerHTML = zeroNum(t.seconds);
-      if (t.total <= 0) {
-        clearInterval(timeInterval);
-        document.querySelectorAll(".timer__block").forEach(item => {
-          item.style.display = "none";
-        });
-        const elem = document.createElement("div");
-        elem.classList.add("subtitle");
-        elem.innerHTML = "СВАДЬБА НАЧАЛАСЬ!";
-        timer.append(elem);
-      }
-    }
-  }
-  getClock(id, deadline);
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (timer);
-
-/***/ }),
-
-/***/ "./js/modules/timingAnimate.js":
-/*!*************************************!*\
-  !*** ./js/modules/timingAnimate.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-const timingAnimate = () => {
-  function timingAnimateLeft(element) {
-    element.animate([{
-      transform: "translateX(-100%)",
-      opacity: 0
-    }, {
-      transform: "translateX(5px)",
-      opacity: 1,
-      offset: 0.9
-    }, {
-      transform: "translateX(0)"
-    }], {
-      duration: 4800,
-      easing: "cubic-bezier(0.25, 1.6, 0.5, 1)",
-      fill: "forwards"
-    });
-  }
-  function observeAndAnimate(selector) {
-    const elements = document.querySelectorAll(selector);
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          timingAnimateLeft(entry.target);
-          entry.target.classList.remove('hide');
-          obs.unobserve(entry.target); // Отключаем наблюдение после анимации
-        }
-      });
-    }, {
-      threshold: 1
-    });
-    elements.forEach(el => observer.observe(el));
-  }
-  observeAndAnimate(".timing__wrapper");
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (timingAnimate);
-
-/***/ }),
-
-/***/ "./js/services/services.js":
-/*!*********************************!*\
-  !*** ./js/services/services.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   postData: () => (/* binding */ postData)
-/* harmony export */ });
-const postData = async (url, data) => {
-  try {
-    console.log("Отправка запроса на:", url);
-    console.log("Данные:", data);
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: data
-    });
-    console.log("Получен ответ со статусом:", res.status);
-    if (!res.ok) {
-      const errorText = await res.text();
-      console.error("Ошибка ответа:", errorText);
-      throw new Error(`Ошибка ${res.status}: ${errorText}`);
-    }
-    return await res.json();
-  } catch (error) {
-    console.error("Ошибка в postData:", error);
-    throw error;
-  }
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/@babel/polyfill/lib/index.js":
 /*!***************************************************!*\
   !*** ./node_modules/@babel/polyfill/lib/index.js ***!
@@ -10261,35 +9917,6 @@ try {
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -10311,13 +9938,12 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/polyfill */ "./node_modules/@babel/polyfill/lib/index.js");
-/* harmony import */ var _babel_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_polyfill__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/timer */ "./js/modules/timer.js");
-/* harmony import */ var _modules_routeMap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/routeMap */ "./js/modules/routeMap.js");
-/* harmony import */ var _modules_showContentTimeout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/showContentTimeout */ "./js/modules/showContentTimeout.js");
-/* harmony import */ var _modules_observer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/observer */ "./js/modules/observer.js");
-/* harmony import */ var _modules_timingAnimate__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/timingAnimate */ "./js/modules/timingAnimate.js");
-/* harmony import */ var _modules_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/form */ "./js/modules/form.js");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/timer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/routeMap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/showContentTimeout'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/observer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/timingAnimate'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/form'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 
@@ -10327,19 +9953,19 @@ __webpack_require__.r(__webpack_exports__);
 
 window.addEventListener("DOMContentLoaded", () => {
   const deadline = "2025-09-13";
-  (0,_modules_showContentTimeout__WEBPACK_IMPORTED_MODULE_3__["default"])(".date");
-  (0,_modules_showContentTimeout__WEBPACK_IMPORTED_MODULE_3__["default"])(".guest");
-  (0,_modules_showContentTimeout__WEBPACK_IMPORTED_MODULE_3__["default"])(".end__timer");
-  (0,_modules_timer__WEBPACK_IMPORTED_MODULE_1__["default"])(".timer", deadline);
-  (0,_modules_routeMap__WEBPACK_IMPORTED_MODULE_2__["default"])(".buttonMap");
-  (0,_modules_observer__WEBPACK_IMPORTED_MODULE_4__["default"])('.names__title');
-  (0,_modules_observer__WEBPACK_IMPORTED_MODULE_4__["default"])(".calendar");
-  (0,_modules_observer__WEBPACK_IMPORTED_MODULE_4__["default"])(".location");
-  (0,_modules_observer__WEBPACK_IMPORTED_MODULE_4__["default"])(".title__wrapper");
-  (0,_modules_observer__WEBPACK_IMPORTED_MODULE_4__["default"])(".form__subtitle");
-  (0,_modules_observer__WEBPACK_IMPORTED_MODULE_4__["default"])("p");
-  (0,_modules_timingAnimate__WEBPACK_IMPORTED_MODULE_5__["default"])();
-  (0,_modules_form__WEBPACK_IMPORTED_MODULE_6__["default"])("form");
+  Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/showContentTimeout'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(".date");
+  Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/showContentTimeout'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(".guest");
+  Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/showContentTimeout'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(".end__timer");
+  Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/timer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(".timer", deadline);
+  Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/routeMap'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(".buttonMap");
+  Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/observer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())('.names__title');
+  Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/observer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(".calendar");
+  Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/observer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(".location");
+  Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/observer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(".title__wrapper");
+  Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/observer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(".form__subtitle");
+  Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/observer'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())("p");
+  Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/timingAnimate'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())();
+  Object(function webpackMissingModule() { var e = new Error("Cannot find module './modules/form'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())("form");
 });
 })();
 
