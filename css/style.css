@@ -259,7 +259,7 @@
     align-items: center;
     justify-content: space-around;
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 40px;
     gap: 15px;
   }
   
@@ -367,25 +367,32 @@
     font-size: 16px;
   }
   .custom-checkbox span {
+    position: relative;
     display: inline-block;
     width: 20px;
     height: 20px;
+    border: 1px solid #5a6d59;
     border-radius: 5px;
-    border: 1px solid black;
-    position: relative;
     transition: background 0.3s;
+    vertical-align: middle;
   }
   /* Галочка внутри чекбокса */
   input[type="checkbox"]:checked + span::after {
-    content: "✔";
+    content: "✓";
     font-size: 16px;
     color: white;
     position: absolute;
-    left: 2px;
-    top: -3px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   input[type="checkbox"]:checked + span {
-    background-color: #5a6d59
+    background-color: #5a6d59;
+    
   }
   /* Кастомные радиокнопки */
   .custom-radio {
@@ -669,7 +676,7 @@
       margin-top: 25px;
     }
     .timing__wrapper {
-      margin-bottom: 16px;
+      margin-bottom: 35px;
     }
     .time {
       font-size: 12px;
@@ -710,12 +717,9 @@
       height: 15px;
     }
     input[type="checkbox"]:checked + span::after {
-      content: "✔";
+      content: "✓";
       font-size: 10px;
       color: white;
-      position: absolute;
-      left: 3px;
-      top: -1px;
     }
   }
   
@@ -828,4 +832,5 @@
     width: 105px;
     height: 60px;
   }
+
   

@@ -3,7 +3,7 @@ const checkWordsInputs = (selector) => {
 
     inputs.forEach(input => {
         input.addEventListener('input', () => {
-            input.value = input.value.replace(/[^а-яё\s]/gi, '');
+            input.value = input.value.replace(/[^\p{L}\s]/gu, '');
         });
     });
 };

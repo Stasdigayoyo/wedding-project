@@ -9,7 +9,8 @@ const timingAnimate= ()=>{
           {
             duration: 4800,
             easing: "cubic-bezier(0.25, 1.6, 0.5, 1)",
-            fill: "forwards" 
+            fill: "forwards",
+
            }
             );
         }
@@ -23,7 +24,7 @@ const timingAnimate= ()=>{
                     obs.unobserve(entry.target); // Отключаем наблюдение после анимации
                   }
                 });
-              }, { threshold: 1 }); 
+              }, { threshold: 1}); 
             
               elements.forEach(el => observer.observe(el));
             }
