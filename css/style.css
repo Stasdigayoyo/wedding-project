@@ -54,6 +54,18 @@
     color: #374C17;
     padding: 15px 0 15px 0;
   }
+  .names__title {
+    opacity: 0;
+    transition: opacity 1.3s ease-out, transform 1.1s ease-out;
+  }
+  
+  .top-title {
+    transform: translateY(-50px); 
+  }
+  
+  .bottom-title {
+    transform: translateY(50px); 
+  }
   .date {
     margin-top: 113px;
     text-align: center;
@@ -196,7 +208,7 @@
     background-color:#808a6d;
     color: #ffff;
     border: none;
-    padding: 10px 15px;
+    padding: 15px 15px;
     margin-top: 18px;
     margin-bottom: 25px;
     font-size: 15px;
@@ -460,26 +472,39 @@
     filter: blur(8px);
     animation: diagonalGlow 2s infinite ease-in-out;
   }
-  @keyframes diagonalGlow {
-    0% {
-      top: -150%;
-      left: -150%;
-      opacity: 0;
-    }
-    30% {
-      opacity: 1;
-    }
-    50% {
-      top: 150%;
-      left: 150%;
-      opacity: 1;
-    }
-    70% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 0; /* Пауза перед новым мерцанием */
-    }
+  .modal {
+    position: fixed; /* Фиксированное положение поверх страницы */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    background: rgba(0, 0, 0, 0.5); /* Затемнение фона */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Поверх всех элементов */
+  }
+  .modal__content {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 80%;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  .dex{
+    width: 105px;
+    height: 60px;
+  }
+  .show {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 2.75s;
+  }
+  .hide{
+    opacity: 0;
   }
   @media (min-width: 750px){
     .names{
@@ -553,18 +578,18 @@
     }
     .buttonMap {
       font-size: 10px;
-      padding: 6px 14px;
+      padding: 11px 14px;
     }
     .buttonMap::before, .buttonMap::after {
       width: 40px;
       height: 40px;
     }
     .buttonMap::before {
-      top: -4px;
+      top: 0px;
       left: -22px;
     }
     .buttonMap::after {
-      top: -4px;
+      top: 0px;
       left: 111px;
     }
     .time {
@@ -586,9 +611,6 @@
     }
     label {
       font-size: 11px;
-    }
-    .input {
-      font-size: 12px;
     }
     .custom-radio span {
       width: 15px;
@@ -671,6 +693,7 @@
     }
     .buttonMap {
       margin-top: 35px;
+      padding: 10px 14px;
     }
     .timing{
       margin-top: 25px;
@@ -703,7 +726,7 @@
     }
     .input {
       padding: 0px;
-      font-size: 10px;
+      font-size: 13px;
     }
     .radio-group label, .checkbox-group label {
       font-size: 10px;
@@ -722,7 +745,6 @@
       color: white;
     }
   }
-  
   /* Animation */
   @keyframes opacity{
     0% {
@@ -784,53 +806,26 @@
         opacity: 1;
     }
   }
-  .names__title {
-    opacity: 0;
-    transition: opacity 1.3s ease-out, transform 1.1s ease-out;
-  }
-  
-  .top-title {
-    transform: translateY(-50px); /* Верхний заголовок уходит вверх */
-  }
-  
-  .bottom-title {
-    transform: translateY(50px); /* Нижний заголовок уходит вниз */
-  }
-  
-  .show {
-    opacity: 1;
-    transform: translateY(0);
-    transition: all 2.75s;
-  }
-  .hide{
-    opacity: 0;
-  }
-  .modal {
-    position: fixed; /* Фиксированное положение поверх страницы */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Центрирование */
-    background: rgba(0, 0, 0, 0.5); /* Затемнение фона */
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000; /* Поверх всех элементов */
-  }
-  
-  .modal__content {
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    max-width: 400px;
-    width: 80%;
-    animation: fadeIn 0.3s ease-in-out;
-  }
-  .dex{
-    width: 105px;
-    height: 60px;
+  @keyframes diagonalGlow {
+    0% {
+      top: -150%;
+      left: -150%;
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    50% {
+      top: 150%;
+      left: 150%;
+      opacity: 1;
+    }
+    70% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0; /* Пауза перед новым мерцанием */
+    }
   }
 
   

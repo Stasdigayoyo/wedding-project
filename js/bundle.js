@@ -71,8 +71,6 @@ const forms = formSelector => {
       formObject.drink = formData.getAll("drink"); // Записываем массив всех выбранных значений
     }
     const json = JSON.stringify(formObject);
-
-    // Здесь будет URL вашего API после деплоя
     (0,_services_services__WEBPACK_IMPORTED_MODULE_0__.postData)("https://wedding-backend-vert.vercel.app/api/send.js", json).then(data => {
       console.log(data);
       showModal(message.success);
@@ -150,14 +148,11 @@ __webpack_require__.r(__webpack_exports__);
 const routeMap = selector => {
   const button = document.querySelector(selector);
   button.addEventListener("click", e => {
-    const destination = "45.059945,38.987466"; // Координаты Офицерская 47, Краснодар
-
+    const destination = "45.059945,38.987466";
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const userLat = position.coords.latitude;
         const userLon = position.coords.longitude;
-
-        // Определяем, мобильное устройство или нет
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
         if (isMobile && isIOS) {

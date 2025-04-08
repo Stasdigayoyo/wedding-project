@@ -41,7 +41,6 @@ const forms = (formSelector) => {
         
         const json = JSON.stringify(formObject);
         
-        // Здесь будет URL вашего API после деплоя
         postData("https://wedding-backend-vert.vercel.app/api/send.js", json)
             .then((data) => {
                 console.log(data);

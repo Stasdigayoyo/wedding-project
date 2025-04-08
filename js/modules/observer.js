@@ -1,5 +1,4 @@
 const observe = (selector)=>{
-
     const elements = document.querySelectorAll(selector);
     if(!elements) return;
     const observer = new IntersectionObserver((entries) => {

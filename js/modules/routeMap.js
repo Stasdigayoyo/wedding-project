@@ -2,7 +2,7 @@ const routeMap = (selector) => {
   const button = document.querySelector(selector);
   
   button.addEventListener("click", (e) => {
-      const destination = "45.059945,38.987466"; // Координаты Офицерская 47, Краснодар
+      const destination = "45.059945,38.987466"; 
       
       if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
@@ -10,7 +10,7 @@ const routeMap = (selector) => {
                   const userLat = position.coords.latitude;
                   const userLon = position.coords.longitude;
                   
-                  // Определяем, мобильное устройство или нет
+                  
                   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
                   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
                   
