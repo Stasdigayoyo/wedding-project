@@ -61,7 +61,7 @@ const forms = (formSelector) => {
         modal.classList.add("modal");
         modal.innerHTML = `
             <div class="modal__content">
-                <div><img class="dex" src="img/Dex.png" alt="Dex" /></div>
+                <div><img class="dex" src="img/Dex.webp" alt="Dex" /></div>
                 <div class="modal__title">${message}</div>
             </div>`;
         document.body.append(modal);
