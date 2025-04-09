@@ -1,3 +1,4 @@
+import '../css/style.css';
 import '@babel/polyfill';
 import timer from "./modules/timer";
 import routeMap from "./modules/routeMap";
