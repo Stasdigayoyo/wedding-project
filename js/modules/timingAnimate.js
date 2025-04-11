@@ -2,13 +2,12 @@ const timingAnimate= ()=>{
     function timingAnimateLeft(element){
         element.animate(
           [
-            {transform: "translateX(-100%)", opacity: 0},
-            {transform: "translateX(5px)", opacity: 1, offset: 0.9 },
-            {transform: "translateX(0)"}
+            {transform: "translateY(175%)", opacity: 0},
+            {transform: "translateY(0)", opacity: 1, offset: 0.9 },
           ],
           {
-            duration: 4800,
-            easing: "cubic-bezier(0.25, 1.6, 0.5, 1)",
+            duration: 1800,
+           easing: "cubic-bezier(0.33, 1, 0.68, 1)",
             fill: "forwards",
 
            }

@@ -7,8 +7,8 @@ const timer = (id, deadline)=>{
     
       days = Math.floor(t / (1000 * 60 * 60 * 24));
       hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-      minutes = Math.floor((t / 1000 / 60) % 24);
-      seconds = Math.floor((t / 1000) % 24);
+      minutes = Math.floor((t / 1000 / 60) % 60);
+      seconds = Math.floor((t / 1000) % 60);
       return {
         total: t,
         days,
